@@ -3,3 +3,5 @@ Metatron Eagle is an open source analytics solution for identifying security and
 
 ![diagram2](https://user-images.githubusercontent.com/98597119/152856402-998b1c1c-de88-43ac-a60f-c554479e3330.png)
 
+<li style="width: 100%; float: left; margin-right: -100%; opacity: 1; display: block; z-index: 2;" class="flex-active-slide"><img src="images/slider/3.jpg" alt="Slide 1" draggable="false"></li>
+
