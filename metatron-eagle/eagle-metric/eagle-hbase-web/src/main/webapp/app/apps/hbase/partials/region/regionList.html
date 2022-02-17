@@ -1,0 +1,73 @@
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one
+  or more contributor license agreements.  See the NOTICE file
+  distributed with this work for additional information
+  regarding copyright ownership.  The ASF licenses this file
+  to you under the Apache License, Version 2.0 (the
+  "License"); you may not use this file except in compliance
+  with the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+  -->
+<div class="nav-tabs-custom" style="cursor: move;">
+	<ul class="nav nav-tabs pull-right ui-sortable-handle">
+      <li><a href="#heatmap" data-toggle="tab" aria-expanded="false" ng-click="healthHeatMap.resize()">HeatMap</a></li>
+      <li class="active"><a href="#list" data-toggle="tab" aria-expanded="true">List</a></li>
+    </ul>
+
+    <div class="tab-content no-padding keepContent">
+    	<div class="box box-primary no-margin tab-pane fade in active" id="list">
+			<div class="box-body">
+				<div id="regionserverList" sort-table="regionserverList" is-sorting="isSorting"
+					 search-path-list="searchPathList"
+					 scope="tableScope">
+					<table class="table table-bordered">
+						<thead>
+						<tr>
+							<th sortpath="tags.hostname">RegionServer</th>
+							<th sortpath="tags.rack">Rack</th>
+							<th sortpath="tags.site">SiteId</th>
+							<th sortpath="status">Status</th>
+						</tr>
+						</thead>
+						<tbody>
+						<tr ng-repeat="item in regionserverList">
+							<td>
+								<a ui-sref="regionDetail({siteId: site, hostname: item.tags.hostname})">{{item.tags.hostname}}</a>
+							</td>
+							<td>{{item.tags.rack}}</td>
+							<td>{{item.tags.site}}</td>
+							<td>
+								<span ng-if="item.status===live" class="label label-success">Healthy</span>
+								<span ng-if="item.status===dead" class="label label-danger">UnHealthy</span>
+							</td>
+						</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+
+
+		<!--region server health chart-->
+		<div class="box box-primary no-margin tab-pane fade" id="heatmap">
+			<div class="box-body">
+				<div class="hadoopMetric-chart">
+					<div chart="healthHeatMap" ng-style="heatmapHeight" series="healthStatusSeries" category="healthStatusCategory" option="healthStatusOption"></div>
+					<div ng-if="(healthStatusSeries || []).length === 0" class="overlay">
+						<i class="fa fa-refresh fa-spin"></i>
+					</div>
+				</div>
+			</div>
+		</div>
+
+    </div>
+
+</div>
+
